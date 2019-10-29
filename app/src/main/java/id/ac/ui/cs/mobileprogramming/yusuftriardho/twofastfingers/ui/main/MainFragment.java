@@ -22,8 +22,8 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class MainFragment extends Fragment {
 
-    private Button sideBarBtn, startBtn, timer, backBtn;
-    private TextView title, textBox, resultBox;
+    private Button sideBarBtn, startBtn, backBtn;
+    private TextView title, textBox, resultBox, timer;
     private EditText input;
     private String show;
     private String[] words;
@@ -96,6 +96,7 @@ public class MainFragment extends Fragment {
             f2 = View.VISIBLE; // 0
         } else {
             resultBox.setText("Your score: " + String.valueOf(wordCount) + " word correct!");
+
         }
 
         sideBarBtn.setVisibility(f1);
@@ -111,11 +112,11 @@ public class MainFragment extends Fragment {
 
     void initText() {
         String[] word_src = mViewModel.words;
-        words = new String[201];
+        words = new String[1001];
         show = "";
         int wordIdx = 1;
         int current_length = 0;
-        for (int i = 1; i <= 200; i++) {
+        for (int i = 1; i <= 1000; i++) {
             String now = word_src[new Random().nextInt(word_src.length)] + " ";
             if (current_length + now.length() <= 27) {
                 words[wordIdx] = now;
@@ -124,8 +125,8 @@ public class MainFragment extends Fragment {
                 wordIdx++;
             }
             else {
-                show += "\n";
-                current_length = 0;
+                show += "\n" + now;
+                current_length = now.length();
             }
         }
         textBox.setText(show);
@@ -136,11 +137,8 @@ public class MainFragment extends Fragment {
         pointerWords = 1;
 
         input.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
             public void afterTextChanged(Editable s) {
                 String lastWord = s.toString();
                 if(s.toString().contains(" ")){
@@ -159,7 +157,7 @@ public class MainFragment extends Fragment {
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long ms) {
-                timer.setText(""+ms/1000);
+                timer.setText(ms/1000+"s");
             }
 
             public void onFinish() {
