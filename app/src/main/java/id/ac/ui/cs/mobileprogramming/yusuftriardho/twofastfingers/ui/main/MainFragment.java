@@ -5,9 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +15,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Random;
+
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class MainFragment extends Fragment {
 
-    Button sideBarBtn, startBtn, timer, backBtn;
-    TextView title, textBox, resultBox;
-    EditText input;
+    private Button sideBarBtn, startBtn, timer, backBtn;
+    private TextView title, textBox, resultBox;
+    private EditText input;
+    private String show;
+    private MainViewModel mViewModel;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -68,6 +72,7 @@ public class MainFragment extends Fragment {
     }
 
     public void getRes() {
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         sideBarBtn = getView().findViewById(R.id.sidebar_btn);
         startBtn = getView().findViewById(R.id.start_btn);
         title = getView().findViewById(R.id.title);
@@ -82,6 +87,7 @@ public class MainFragment extends Fragment {
         int f1 = View.VISIBLE, f2 = View.GONE;
 
         if (playState) {
+            initText();
             f1 = View.GONE;
             f2 = View.VISIBLE;
         }
@@ -97,11 +103,34 @@ public class MainFragment extends Fragment {
         backBtn.setVisibility(f2);
     }
 
+    void initText() {
+        String[] words = mViewModel.words;
+        show = "";
+        int cur = 0;
+        for (int i = 1; i <= 100; i++) {
+            String now = words[new Random().nextInt(words.length)] + " ";
+            if (cur + now.length() <= 27) {
+                show += now;
+                cur += now.length();
+            }
+            else {
+                show += "\n";
+                cur = 0;
+            }
+        }
+        textBox.setText(show);
+    }
+
+    void pros() {
+        
+    }
+
     public void runTimer() {
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long ms) {
                 timer.setText(""+ms/1000);
+                pros();
             }
 
             public void onFinish() {
