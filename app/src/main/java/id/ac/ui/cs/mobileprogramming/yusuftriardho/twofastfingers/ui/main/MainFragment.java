@@ -1,19 +1,20 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.Random;
 
@@ -25,7 +26,9 @@ public class MainFragment extends Fragment {
     private TextView title, textBox, resultBox;
     private EditText input;
     private String show;
+    private String[] words;
     private MainViewModel mViewModel;
+    private int wordCount, pointerWords;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -104,25 +107,49 @@ public class MainFragment extends Fragment {
     }
 
     void initText() {
-        String[] words = mViewModel.words;
+        String[] word_src = mViewModel.words;
+        words = new String[201];
         show = "";
-        int cur = 0;
-        for (int i = 1; i <= 100; i++) {
-            String now = words[new Random().nextInt(words.length)] + " ";
-            if (cur + now.length() <= 27) {
+        int wordIdx = 1;
+        int current_length = 0;
+        for (int i = 1; i <= 200; i++) {
+            String now = word_src[new Random().nextInt(word_src.length)] + " ";
+            if (current_length + now.length() <= 27) {
+                words[wordIdx] = now;
                 show += now;
-                cur += now.length();
+                current_length += now.length();
+                wordIdx++;
             }
             else {
                 show += "\n";
-                cur = 0;
+                current_length = 0;
             }
         }
         textBox.setText(show);
     }
 
     void pros() {
-        
+        wordCount = 0;
+        pointerWords = 1;
+
+        input.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            public void afterTextChanged(Editable s) {
+                String lastWord = s.toString();
+                if(s.toString().contains(" ")){
+                    input.getText().clear();
+                    if (lastWord.equals(words[pointerWords])) wordCount++;
+                    show = show.substring(words[pointerWords].length());
+                    if (show.charAt(0) == '\n') show = show.substring(1);
+                    textBox.setText(show);
+                    pointerWords++;
+                }
+            }
+        });
     }
 
     public void runTimer() {
@@ -130,17 +157,18 @@ public class MainFragment extends Fragment {
 
             public void onTick(long ms) {
                 timer.setText(""+ms/1000);
-                pros();
             }
 
             public void onFinish() {
                 isPlayState(false);
+                resultBox.setText("Your score: " + String.valueOf(wordCount) + " word correct!");
             }
         }.start();
     }
 
     public void onStartClick(View view) {
         isPlayState(true);
+        pros();
         runTimer();
     }
 
