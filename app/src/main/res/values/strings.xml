@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">2 Fast Fingers</string>
+
+    <string name="sidebar_btn"><![CDATA[≡]]></string>
+    <string name="about_sidebar_btn">about</string>
+
+    <string name="main_fragment_title">2 FAST FINGERS</string>
+
+    <string name="back_btn"><![CDATA[<]]></string>
+    <string name="app_version">2 fast fingers v1.0</string>
+    <string name="start_btn">start</string>
+</resources>
