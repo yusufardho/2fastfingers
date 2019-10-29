@@ -78,29 +78,23 @@ public class MainFragment extends Fragment {
         backBtn = getView().findViewById(R.id.back_btn);
     }
 
-    public void playState() {
-        sideBarBtn.setVisibility(View.GONE);
-        startBtn.setVisibility(View.GONE);
-        title.setVisibility(View.GONE);
-        resultBox.setVisibility(View.GONE);
+    public void isPlayState(Boolean playState) {
+        int f1 = View.VISIBLE, f2 = View.GONE;
 
-        textBox.setVisibility(View.VISIBLE);
-        input.setVisibility(View.VISIBLE);
-        timer.setVisibility(View.VISIBLE);
-        backBtn.setVisibility(View.VISIBLE);
-    }
+        if (playState) {
+            f1 = View.GONE;
+            f2 = View.VISIBLE;
+        }
 
-    public void menuState() {
-        textBox.setVisibility(View.GONE);
-        input.setVisibility(View.GONE);
-        timer.setVisibility(View.GONE);
+        sideBarBtn.setVisibility(f1);
+        startBtn.setVisibility(f1);
+        title.setVisibility(f1);
+        resultBox.setVisibility(f1);
 
-        sideBarBtn.setVisibility(View.VISIBLE);
-        startBtn.setVisibility(View.VISIBLE);
-        title.setVisibility(View.VISIBLE);
-        resultBox.setVisibility(View.VISIBLE);
-        backBtn.setVisibility(View.VISIBLE);
-
+        textBox.setVisibility(f2);
+        input.setVisibility(f2);
+        timer.setVisibility(f2);
+        backBtn.setVisibility(f2);
     }
 
     public void runTimer() {
@@ -111,13 +105,13 @@ public class MainFragment extends Fragment {
             }
 
             public void onFinish() {
-                menuState();
+                isPlayState(false);
             }
         }.start();
     }
 
     public void onStartClick(View view) {
-        playState();
+        isPlayState(true);
         runTimer();
     }
 
