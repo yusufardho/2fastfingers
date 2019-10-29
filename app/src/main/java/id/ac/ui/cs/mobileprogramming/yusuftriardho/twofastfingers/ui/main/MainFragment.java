@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,16 +18,20 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.Random;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.Timer;
 
 public class MainFragment extends Fragment {
 
     private Button sideBarBtn, startBtn, backBtn;
-    private TextView title, textBox, resultBox, timer;
+    private TextView title, textBox, resultBox, timerBox;
     private EditText input;
     private String show;
     private String[] words;
     private MainViewModel mViewModel;
     private int wordCount, pointerWords;
+    private Timer timer;
+
+    private final int TIME = 59;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -59,6 +62,7 @@ public class MainFragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (timer != null) timer.cancel(true);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance())
                         .addToBackStack(null)
@@ -81,9 +85,11 @@ public class MainFragment extends Fragment {
         title = getView().findViewById(R.id.title);
         textBox = getView().findViewById(R.id.textBox);
         input = getView().findViewById(R.id.inputText);
-        timer = getView().findViewById(R.id.timer);
+        timerBox = getView().findViewById(R.id.timer);
         resultBox = getView().findViewById(R.id.resultBox);
         backBtn = getView().findViewById(R.id.back_btn);
+
+        timer = new Timer(this);
     }
 
     public void isPlayState(Boolean playState) {
@@ -106,7 +112,7 @@ public class MainFragment extends Fragment {
 
         textBox.setVisibility(f2);
         input.setVisibility(f2);
-        timer.setVisibility(f2);
+        timerBox.setVisibility(f2);
         backBtn.setVisibility(f2);
     }
 
@@ -132,7 +138,7 @@ public class MainFragment extends Fragment {
         textBox.setText(show);
     }
 
-    void pros() {
+    public void pros() {
         wordCount = 0;
         pointerWords = 1;
 
@@ -153,23 +159,15 @@ public class MainFragment extends Fragment {
         });
     }
 
-    public void runTimer() {
-        new CountDownTimer(60000, 1000) {
-
-            public void onTick(long ms) {
-                timer.setText(ms/1000+"s");
-            }
-
-            public void onFinish() {
-                isPlayState(false);
-            }
-        }.start();
+    public void setTimer(int currentSec) {
+        timerBox.setText(String.format("%ss", currentSec));
     }
 
     public void onStartClick(View view) {
         isPlayState(true);
         pros();
-        runTimer();
+        timer.execute(TIME);
+
     }
 
 }
