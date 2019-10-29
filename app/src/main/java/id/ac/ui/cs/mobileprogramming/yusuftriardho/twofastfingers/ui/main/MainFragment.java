@@ -91,8 +91,11 @@ public class MainFragment extends Fragment {
 
         if (playState) {
             initText();
-            f1 = View.GONE;
-            f2 = View.VISIBLE;
+            input.getText().clear();
+            f1 = View.GONE; // 8
+            f2 = View.VISIBLE; // 0
+        } else {
+            resultBox.setText("Your score: " + String.valueOf(wordCount) + " word correct!");
         }
 
         sideBarBtn.setVisibility(f1);
@@ -161,7 +164,6 @@ public class MainFragment extends Fragment {
 
             public void onFinish() {
                 isPlayState(false);
-                resultBox.setText("Your score: " + String.valueOf(wordCount) + " word correct!");
             }
         }.start();
     }
