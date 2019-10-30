@@ -18,8 +18,6 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class ResultFragment extends Fragment {
 
-    private PlayViewModel pViewModel;
-
     public static ResultFragment newInstance() {
         return new ResultFragment();
     }
@@ -35,8 +33,9 @@ public class ResultFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setResult();
-        Button mainMenu = getView().findViewById(R.id.main_menu_btn);
-        mainMenu.setOnClickListener(new View.OnClickListener() {
+
+        Button mainMenuBtn = getView().findViewById(R.id.main_menu_btn);
+        mainMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -44,10 +43,20 @@ public class ResultFragment extends Fragment {
             }
         });
 
+        Button shareBtn = getView().findViewById(R.id.share_btn);
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.PlayActivity, ContactFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     public void setResult() {
-        pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
+        PlayViewModel pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         TextView scoreView = getView().findViewById(R.id.score);
         String txt = String.valueOf(pViewModel.getCurrentScore()) + " WPM";
         scoreView.setText(txt);
