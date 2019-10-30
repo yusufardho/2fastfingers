@@ -13,4 +13,8 @@
     <string name="refresh_btn">⟲</string>
     <string name="init_timer">59</string>
     <string name="announce_result">Your score: 50 WPM</string>
+    <string name="main_menu">main menu</string>
+    <string name="share">Share</string>
+    <string name="sample_result">50 WPM</string>
+    <string name="try_again_btn">try again</string>
 </resources>

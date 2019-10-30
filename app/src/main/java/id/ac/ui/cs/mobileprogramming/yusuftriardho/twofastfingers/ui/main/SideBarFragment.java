@@ -41,7 +41,7 @@ public class SideBarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, AboutFragment.newInstance())
+                        .replace(R.id.MainActivity, AboutFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }

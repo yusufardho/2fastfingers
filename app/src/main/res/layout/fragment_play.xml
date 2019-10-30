@@ -8,46 +8,12 @@
     tools:context=".ui.main.MainFragment">
 
     <Button
-        android:id="@+id/sidebar_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/sidebar_btn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/main_fragment_title"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/start_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/start_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <!--    playing state-->
-
-    <Button
         android:id="@+id/back_btn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/back_btn"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +26,6 @@
         android:maxLines="2"
         android:text="line1\nline2"
         android:textSize="20sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +38,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textBox" />
@@ -84,17 +48,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
-        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/inputText"
         app:layout_constraintTop_toBottomOf="@+id/textBox" />
-
-    <TextView
-        android:id="@+id/resultBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,17 @@
-package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers;
+package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.MainFragment;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFragment;
 
 public class Timer extends AsyncTask<Integer, Integer, String> {
-    private MainFragment mainFragment;
+    private PlayFragment playFragment;
 
-    public Timer(MainFragment mainFragment) {
-        this.mainFragment = mainFragment;
+    public Timer(PlayFragment playFragment) {
+        this.playFragment = playFragment;
     }
 
     @Override
@@ -30,13 +30,13 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
 
     @Override
     protected void onProgressUpdate(Integer... val) {
-        mainFragment.setTimer(val[0]);
+        playFragment.setTimer(val[0]);
         Log.d("onProgressUpdate", "running");
     }
 
     @Override
     protected void onPostExecute(String result) {
-        mainFragment.isPlayState(false);
+        playFragment.onFinishState();
         Log.d("onPostExecute", "running");
     }
 }
