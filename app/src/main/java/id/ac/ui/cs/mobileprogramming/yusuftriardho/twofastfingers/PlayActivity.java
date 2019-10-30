@@ -19,4 +19,8 @@ public class PlayActivity extends AppCompatActivity {
                     .commitNow();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

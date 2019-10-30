@@ -34,6 +34,7 @@ public class ResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setResult();
         Button mainMenu = getView().findViewById(R.id.main_menu_btn);
         mainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +44,12 @@ public class ResultFragment extends Fragment {
             }
         });
 
+    }
+
+    public void setResult() {
         pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         TextView scoreView = getView().findViewById(R.id.score);
-        scoreView.setText(String.valueOf(pViewModel.getCurrentScore()) + " WPM");
+        String txt = String.valueOf(pViewModel.getCurrentScore()) + " WPM";
+        scoreView.setText(txt);
     }
 }

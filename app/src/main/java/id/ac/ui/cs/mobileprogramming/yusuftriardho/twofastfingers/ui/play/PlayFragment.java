@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,13 +23,14 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools.Timer;
 
 public class PlayFragment extends Fragment {
 
+    private Button backBtn;
     private TextView textBox, timerBox;
     private EditText input;
     private String show;
     private String[] words;
     private PlayViewModel pViewModel;
     private int wordCount, pointerWords;
-    private Timer timer;
+    public Timer timer;
 
     private final int TIME = 59;
 
@@ -48,7 +50,19 @@ public class PlayFragment extends Fragment {
         getRes();
         setShowText();
         onInputChange();
-        timer.execute(5);
+        timer.execute(TIME);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (timer != null) timer.cancel(true);
+                pViewModel.setCurrentScore(wordCount);
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.PlayActivity, ResultFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     public void getRes() {
@@ -56,6 +70,7 @@ public class PlayFragment extends Fragment {
         textBox = getView().findViewById(R.id.textBox);
         input = getView().findViewById(R.id.inputText);
         timerBox = getView().findViewById(R.id.timer);
+        backBtn = getView().findViewById(R.id.back_btn);
 
         timer = new Timer(this);
     }
