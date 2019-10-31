@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">2 Fast Fingers</string>
 
+    <!--    main activity-->
     <string name="sidebar_btn"><![CDATA[≡]]></string>
     <string name="about_sidebar_btn">about</string>
     <string name="leaderboard_sidebar_btn">leaderboard</string>
@@ -12,9 +13,15 @@
     <string name="start_btn">start</string>
     <string name="refresh_btn">⟲</string>
     <string name="init_timer">59</string>
-    <string name="announce_result">Your score: 50 WPM</string>
     <string name="main_menu">main menu</string>
+    <string name="language_toggle">Change Language</string>
+
+    <!--play activity-->
     <string name="share">Share</string>
     <string name="sample_result">50 WPM</string>
     <string name="try_again_btn">try again</string>
+    <string name="score_result">%d WPM</string>
+    <string name="timer_display">%ss</string>
+    <string name="no_contact_found">No contacts found.</string>
+    <string name="read_contact_per_disabled">Contacts permission must be allowed.</string>
 </resources>

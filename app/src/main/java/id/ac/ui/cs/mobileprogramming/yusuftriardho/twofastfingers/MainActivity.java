@@ -18,5 +18,6 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.MainActivity, MainFragment.newInstance())
                     .commitNow();
         }
+
     }
 }

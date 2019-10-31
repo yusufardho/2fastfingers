@@ -10,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.PlayActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
@@ -46,7 +47,10 @@ public class MainFragment extends Fragment {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainViewModel mViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
+
                 Intent intent = new Intent(getActivity(), PlayActivity.class);
+                intent.putExtra("lang", mViewModel.language);
                 startActivity(intent);
             }
         });

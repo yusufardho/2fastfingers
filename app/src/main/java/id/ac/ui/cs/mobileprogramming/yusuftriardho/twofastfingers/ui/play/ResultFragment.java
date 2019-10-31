@@ -53,12 +53,23 @@ public class ResultFragment extends Fragment {
                         .commit();
             }
         });
+
+        Button tryAgainBtn = getView().findViewById(R.id.try_again_btn);
+        tryAgainBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.PlayActivity, PlayFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     public void setResult() {
         PlayViewModel pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         TextView scoreView = getView().findViewById(R.id.score);
-        String txt = String.valueOf(pViewModel.getCurrentScore()) + " WPM";
+        String txt = String.format(getString(R.string.score_result), pViewModel.getCurrentScore());
         scoreView.setText(txt);
     }
 }

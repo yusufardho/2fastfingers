@@ -52,12 +52,12 @@ public class ContactFragment extends Fragment {
             if (contacts.size() == 0) {
                 listView.setVisibility(View.GONE);
                 notesBox.setVisibility(View.VISIBLE);
-                notesBox.setText("No contacts found.");
+                notesBox.setText(R.string.no_contact_found);
             }
         } else {
             listView.setVisibility(View.GONE);
             notesBox.setVisibility(View.VISIBLE);
-            notesBox.setText("Contacts permission must be allowed.");
+            notesBox.setText(R.string.read_contact_per_disabled);
         }
 
         Button backBtn = getView().findViewById(R.id.back_btn);

@@ -1,9 +1,9 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +47,7 @@ public class PlayFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Intent intent = getActivity().getIntent();
         setRetainInstance(true);
         getRes();
         setShowText();
@@ -77,6 +78,8 @@ public class PlayFragment extends Fragment {
     }
 
     public void setShowText() {
+        Intent intent = getActivity().getIntent();
+        pViewModel.setWordsLang(intent.getStringExtra("lang"));
         String[] word_src = pViewModel.words;
         words = new String[1001];
         show = "";
@@ -120,7 +123,6 @@ public class PlayFragment extends Fragment {
     }
 
     public void onFinishState() {
-        Log.d("currentscore via mviewmodel", wordCount+"");
         pViewModel.setCurrentScore(wordCount);
         getFragmentManager().beginTransaction()
                 .replace(R.id.PlayActivity, ResultFragment.newInstance())
@@ -129,7 +131,7 @@ public class PlayFragment extends Fragment {
     }
 
     public void setTimer(int currentSec) {
-        timerBox.setText(String.format("%ss", currentSec));
+        timerBox.setText(String.format(getString(R.string.timer_display), currentSec));
     }
 
 }
