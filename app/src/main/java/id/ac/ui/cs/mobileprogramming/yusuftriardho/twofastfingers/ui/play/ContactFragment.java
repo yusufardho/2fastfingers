@@ -27,6 +27,8 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class ContactFragment extends Fragment {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+
     private ArrayList<String> contacts;
     private TextView notesBox;
     private ListView listView;
@@ -47,14 +49,16 @@ public class ContactFragment extends Fragment {
         notesBox = getView().findViewById(R.id.fragment_contacts_notes);
         listView = getView().findViewById(R.id.listContact);
 
-        if (permissionAlreadyGranted()) {
+        requestReadContact();
+
+        try {
             fetchContact();
             if (contacts.size() == 0) {
                 listView.setVisibility(View.GONE);
                 notesBox.setVisibility(View.VISIBLE);
                 notesBox.setText(R.string.no_contact_found);
             }
-        } else {
+        } catch (Exception e) {
             listView.setVisibility(View.GONE);
             notesBox.setVisibility(View.VISIBLE);
             notesBox.setText(R.string.read_contact_per_disabled);
@@ -94,12 +98,18 @@ public class ContactFragment extends Fragment {
         listView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, contacts));
     }
 
-
-    private boolean permissionAlreadyGranted() {
-        int result = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS);
-        return result == PackageManager.PERMISSION_GRANTED;
+    private void requestReadContact() {
+        if (!isPermissionChecked()) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.PlayActivity, PlayFragment.newInstance())
+                    .replace(R.id.PlayActivity, ResultFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
-
-
+    private boolean isPermissionChecked() {
+        return (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED);
+    }
 }
