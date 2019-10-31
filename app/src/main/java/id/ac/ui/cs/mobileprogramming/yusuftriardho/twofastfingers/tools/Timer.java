@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,12 +30,10 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... val) {
         playFragment.setTimer(val[0]);
-        Log.d("onProgressUpdate", "running");
     }
 
     @Override
     protected void onPostExecute(String result) {
         playFragment.onFinishState();
-        Log.d("onPostExecute", "running");
     }
 }

@@ -24,4 +24,5 @@
     <string name="timer_display">%ss</string>
     <string name="no_contact_found">No contacts found.</string>
     <string name="read_contact_per_disabled">Contacts permission must be allowed.</string>
+    <string name="exit_play">X</string>
 </resources>

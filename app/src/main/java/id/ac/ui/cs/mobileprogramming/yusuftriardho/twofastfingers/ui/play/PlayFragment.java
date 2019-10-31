@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,15 +83,13 @@ public class PlayFragment extends Fragment {
         String[] word_src = pViewModel.words;
         words = new String[1001];
         show = "";
-        int wordIdx = 1;
         int current_length = 0;
         for (int i = 1; i <= 1000; i++) {
             String now = word_src[new Random().nextInt(word_src.length)] + " ";
+            words[i] = now;
             if (current_length + now.length() <= 27) {
-                words[wordIdx] = now;
                 show += now;
                 current_length += now.length();
-                wordIdx++;
             }
             else {
                 show += "\n" + now;
