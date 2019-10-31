@@ -2,6 +2,7 @@ package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,12 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.ArrayList;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
-public class ContactFragment extends Fragment {
+public class ContactFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
 
@@ -96,6 +99,7 @@ public class ContactFragment extends Fragment {
         }
 
         listView.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, contacts));
+        listView.setOnItemClickListener(this);
     }
 
     private void requestReadContact() {
@@ -112,4 +116,21 @@ public class ContactFragment extends Fragment {
     private boolean isPermissionChecked() {
         return (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        PlayViewModel pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
+        String name = contacts.get(position).split("\n")[0];
+        String numPhone = contacts.get(position).split("\n")[1];
+        String msg = String.format(getString(R.string.share_msg), name, pViewModel.getCurrentScore());
+
+        Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+        i.putExtra("address", numPhone);
+        i.putExtra("sms_body", msg);
+        i.setType("vnd.android-dir/mms-sms");
+
+        startActivity(i);
+
+    }
+
 }
