@@ -18,27 +18,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/WPMstand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/WPMstand"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/main_menu_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
         android:text="@string/main_menu"
-        app:layout_constraintEnd_toEndOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="@+id/WPMstand"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintTop_toBottomOf="@+id/WPMstand" />
 
     <Button
         android:id="@+id/try_again_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="@string/try_again_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/score"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintStart_toStartOf="@+id/WPMstand"
+        app:layout_constraintTop_toBottomOf="@+id/WPMstand" />
 
     <Button
         android:id="@+id/share_btn"

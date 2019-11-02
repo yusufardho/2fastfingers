@@ -26,4 +26,5 @@
     <string name="read_contact_per_disabled">Contacts permission must be allowed.</string>
     <string name="exit_play">X</string>
     <string name="share_msg">Hi %s, I can type %d words per minute! Are you faster? let\'s play 2 fast fingers now.</string>
+    <string name="WPMstand">(words per minute)</string>
 </resources>

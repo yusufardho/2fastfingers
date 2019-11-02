@@ -27,4 +27,5 @@
     <string name="read_contact_per_disabled">ijinkan kontak terlebih dahulu.</string>
     <string name="exit_play">X</string>
     <string name="share_msg">Halo %s, Aku bisa mengetik %d kata per menit! kamu lebih cepat? yuk main 2 fast fingers sekarang.</string>
+    <string name="WPMstand">(kata per menit)</string>
 </resources>
