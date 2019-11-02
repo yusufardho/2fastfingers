@@ -1,16 +1,13 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.BackgroundColorSpan;
-import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
@@ -36,7 +34,8 @@ public class PlayFragment extends Fragment {
     private String show;
     private String[] words;
     private PlayViewModel pViewModel;
-    private int wordCount, pointerWords;
+    private int wordCount, pointerWords, charPassed, THRESHOLD;
+    private ArrayList<DataColor> listColor;
     public Timer timer;
 
     private final int TIME = 59;
@@ -87,13 +86,18 @@ public class PlayFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         pViewModel.setWordsLang(intent.getStringExtra("lang"));
         String[] word_src = pViewModel.words;
+        if (textBox.getText().charAt(0) == 'p') {
+            THRESHOLD = 50;
+        } else {
+            THRESHOLD = 27;
+        }
         words = new String[1001];
         show = "";
         int current_length = 0;
         for (int i = 1; i <= 1000; i++) {
             String now = word_src[new Random().nextInt(word_src.length)] + " ";
             words[i] = now;
-            if (current_length + now.length() <= 27) {
+            if (current_length + now.length() <= THRESHOLD) {
                 show += now;
                 current_length += now.length();
             }
@@ -108,7 +112,10 @@ public class PlayFragment extends Fragment {
     public void onInputChange() {
         wordCount = 0;
         pointerWords = 1;
-        highlightTextPart(show, words[pointerWords].length()-1);
+        charPassed = 0;
+        listColor = new ArrayList<>();
+        listColor.add(new DataColor(0,words[pointerWords].length()-1, Color.YELLOW));
+        highlightTextPart(show, listColor);
 
         input.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -117,12 +124,26 @@ public class PlayFragment extends Fragment {
                 String lastWord = s.toString();
                 if(s.toString().contains(" ")){
                     input.getText().clear();
-                    if (lastWord.equals(words[pointerWords])) wordCount++;
-                    show = show.substring(words[pointerWords].length());
-                    if (show.charAt(0) == '\n') show = show.substring(1);
-                    textBox.setText(show);
+                    charPassed += words[pointerWords].length();
+                    if (lastWord.equals(words[pointerWords])) {
+                        listColor.get(listColor.size()-1).color = Color.parseColor("#45B8AC");
+                        wordCount++;
+                    } else {
+                        listColor.get(listColor.size()-1).color = Color.parseColor("#F7CAC9");
+                    }
+                    if (show.charAt(charPassed) == '\n') {
+                        listColor.clear();
+                        show = show.substring(charPassed+1);
+                        textBox.setText(show);
+                        charPassed = 0;
+                        listColor.add(new DataColor(0,words[pointerWords+1].length()-1, Color.YELLOW));
+                    } else {
+                        listColor.add(new DataColor(charPassed, charPassed+words[pointerWords+1].length()-1, Color.YELLOW));
+                    }
+
+                    highlightTextPart(show, listColor);
                     pointerWords++;
-                    highlightTextPart(show, words[pointerWords].length()-1);
+
                 }
             }
         });
@@ -140,11 +161,25 @@ public class PlayFragment extends Fragment {
         timerBox.setText(String.format(getString(R.string.timer_display), currentSec));
     }
 
-    public void highlightTextPart(String fullText, int endPos) {
+    public void highlightTextPart(String fullText, ArrayList<DataColor> arrList) {
         Spannable spannable = new SpannableString(fullText);
-        BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(Color.YELLOW);
-        spannable.setSpan(backgroundColorSpan, 0, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        for (int i = 0; i < arrList.size(); i++) {
+            DataColor current = arrList.get(i);
+            spannable.setSpan(new BackgroundColorSpan(current.color), current.first, current.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
         textBox.setText(spannable);
+    }
+
+    class DataColor {
+        int first, second, color;
+
+        public DataColor(int f, int s, int c) {
+            this.first = f;
+            this.second = s;
+            this.color = c;
+        }
     }
 
 }

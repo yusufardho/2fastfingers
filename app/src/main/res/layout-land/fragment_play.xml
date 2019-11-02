@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp"
         android:lines="2"
         android:maxLines="2"
-        android:text="line1\nline2"
+        android:text="pline1\nline2"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
