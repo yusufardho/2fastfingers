@@ -1,10 +1,16 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +108,7 @@ public class PlayFragment extends Fragment {
     public void onInputChange() {
         wordCount = 0;
         pointerWords = 1;
+        highlightTextPart(show, words[pointerWords].length()-1);
 
         input.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -115,6 +122,7 @@ public class PlayFragment extends Fragment {
                     if (show.charAt(0) == '\n') show = show.substring(1);
                     textBox.setText(show);
                     pointerWords++;
+                    highlightTextPart(show, words[pointerWords].length()-1);
                 }
             }
         });
@@ -130,6 +138,13 @@ public class PlayFragment extends Fragment {
 
     public void setTimer(int currentSec) {
         timerBox.setText(String.format(getString(R.string.timer_display), currentSec));
+    }
+
+    public void highlightTextPart(String fullText, int endPos) {
+        Spannable spannable = new SpannableString(fullText);
+        BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(Color.YELLOW);
+        spannable.setSpan(backgroundColorSpan, 0, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textBox.setText(spannable);
     }
 
 }
