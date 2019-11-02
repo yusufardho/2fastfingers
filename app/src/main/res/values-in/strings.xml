@@ -7,10 +7,10 @@
     <string name="about_sidebar_btn">tentang</string>
     <string name="leaderboard_sidebar_btn">papan skor</string>
 
-    <string name="main_fragment_title">2 FAST FINGERS</string>
+    <string name="main_fragment_title">2 Fast Fingers</string>
 
     <string name="back_btn"><![CDATA[<]]></string>
-    <string name="app_version">2 fast fingers v1.0</string>
+    <string name="app_version">2 fast fingers vx.x.x</string>
     <string name="start_btn">mulai</string>
     <string name="refresh_btn">⟲</string>
     <string name="init_timer">59</string>
@@ -22,7 +22,7 @@
     <string name="sample_result">50 KPM</string>
     <string name="try_again_btn">coba lagi</string>
     <string name="score_result">KPM</string>
-    <string name="timer_display">%sd</string>
+    <string name="timer_display">%dd</string>
     <string name="no_contact_found">tidak ada kontak.</string>
     <string name="read_contact_per_disabled">ijinkan kontak terlebih dahulu.</string>
     <string name="exit_play">X</string>

@@ -10,7 +10,7 @@
     <FrameLayout
         android:id="@+id/navigateFragment"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="69dp"
         android:background="#03A9F4">
 
         <Button
@@ -26,15 +26,15 @@
 
     <FrameLayout
         android:id="@+id/sideBarFragment"
-        android:layout_width="match_parent"
+        android:layout_width="256dp"
         android:layout_height="match_parent"
-        android:visibility="gone">
-    </FrameLayout>
+        android:visibility="gone"></FrameLayout>
 
     <FrameLayout
         android:id="@+id/bodyFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent">
 
+    </FrameLayout>
 
 </LinearLayout>

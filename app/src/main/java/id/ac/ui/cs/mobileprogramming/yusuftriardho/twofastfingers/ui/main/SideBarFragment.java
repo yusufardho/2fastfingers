@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,6 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class SideBarFragment extends Fragment {
 
-    private MainViewModel mViewModel;
-
     public static SideBarFragment newInstance() {
         return new SideBarFragment();
     }
@@ -29,21 +28,14 @@ public class SideBarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Button backBtn = getView().findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-            }
-        });
+        getView().setBackgroundColor(Color.parseColor("#FFFFFF"));
 
         Button aboutBtn = getView().findViewById(R.id.about_btn);
         aboutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.MainActivity, AboutFragment.newInstance())
+                        .replace(R.id.bodyFragment, AboutFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }

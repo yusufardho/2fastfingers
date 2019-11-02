@@ -49,11 +49,19 @@ public class ResultFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         TextView scoreView = getView().findViewById(R.id.score);
         dispTxt = String.format("%d " + getString(R.string.score_result), pViewModel.getCurrentScore());
         scoreView.setText(dispTxt);
+
+        String color;
+        int score = pViewModel.getCurrentScore();
+        if (score < 10) color = "#955251";
+        else if (score < 30) color = "#DD4124";
+        else if (score < 60) color = "#EFC050";
+        else if (score < 100) color = "#009B77";
+        else color = "#92A8D1";
+        getView().setBackgroundColor(Color.parseColor(color));
 
         Button mainMenuBtn = getView().findViewById(R.id.main_menu_btn);
         mainMenuBtn.setOnClickListener(new View.OnClickListener() {
