@@ -7,7 +7,8 @@ import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,7 @@ public class PlayFragment extends Fragment {
         pointerWords = 1;
         charPassed = 0;
         listColor = new ArrayList<>();
-        listColor.add(new DataColor(0,words[pointerWords].length()-1, Color.YELLOW));
+        listColor.add(new DataColor(0,words[pointerWords].length()-1, Color.BLACK));
         highlightTextPart(show, listColor);
 
         input.addTextChangedListener(new TextWatcher() {
@@ -126,19 +127,19 @@ public class PlayFragment extends Fragment {
                     input.getText().clear();
                     charPassed += words[pointerWords].length();
                     if (lastWord.equals(words[pointerWords])) {
-                        listColor.get(listColor.size()-1).color = Color.parseColor("#45B8AC");
+                        listColor.get(listColor.size()-1).color = Color.parseColor("#50c350");
                         wordCount++;
                     } else {
-                        listColor.get(listColor.size()-1).color = Color.parseColor("#F7CAC9");
+                        listColor.get(listColor.size()-1).color = Color.RED;
                     }
                     if (show.charAt(charPassed) == '\n') {
                         listColor.clear();
                         show = show.substring(charPassed+1);
                         textBox.setText(show);
                         charPassed = 0;
-                        listColor.add(new DataColor(0,words[pointerWords+1].length()-1, Color.YELLOW));
+                        listColor.add(new DataColor(0,words[pointerWords+1].length()-1, Color.BLACK));
                     } else {
-                        listColor.add(new DataColor(charPassed, charPassed+words[pointerWords+1].length()-1, Color.YELLOW));
+                        listColor.add(new DataColor(charPassed, charPassed+words[pointerWords+1].length()-1, Color.BLACK));
                     }
 
                     highlightTextPart(show, listColor);
@@ -166,7 +167,8 @@ public class PlayFragment extends Fragment {
 
         for (int i = 0; i < arrList.size(); i++) {
             DataColor current = arrList.get(i);
-            spannable.setSpan(new BackgroundColorSpan(current.color), current.first, current.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new ForegroundColorSpan(current.color), current.first, current.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), current.first, current.second, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         textBox.setText(spannable);
