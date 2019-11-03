@@ -1,5 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.LeaderboardActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 
 public class SideBarFragment extends Fragment {
@@ -41,15 +43,13 @@ public class SideBarFragment extends Fragment {
             }
         });
 
-//        Button leaderboardBtn = getView().findViewById(R.id.leaderboard_btn);
-//        leaderboardBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getFragmentManager().beginTransaction()
-//                        .replace(R.id.container, LeaderBoard.newInstance())
-//                        .addToBackStack(null)
-//                        .commit();
-//            }
-//        });
+        Button leaderboardBtn = getView().findViewById(R.id.leaderboard_btn);
+        leaderboardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

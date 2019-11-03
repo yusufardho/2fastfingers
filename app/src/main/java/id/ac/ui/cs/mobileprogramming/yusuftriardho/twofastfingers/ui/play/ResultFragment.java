@@ -30,6 +30,8 @@ import java.io.IOException;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreViewModel;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
 
 public class ResultFragment extends Fragment {
 
@@ -53,6 +55,12 @@ public class ResultFragment extends Fragment {
         TextView scoreView = getView().findViewById(R.id.score);
         dispTxt = String.format("%d " + getString(R.string.score_result), pViewModel.getCurrentScore());
         scoreView.setText(dispTxt);
+
+//        WordViewModel mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+//        mWordViewModel.insert(new Word(String.format("%d", pViewModel.getCurrentScore())));
+        PassedScoreViewModel mPassedScoreViewModel = ViewModelProviders.of(this).get(PassedScoreViewModel.class);
+        // TO DO date
+        mPassedScoreViewModel.insert(new PassedScore(pViewModel.getCurrentScore(), "dd/mm/yy\nmm:ss"));
 
         String color;
         int score = pViewModel.getCurrentScore();
