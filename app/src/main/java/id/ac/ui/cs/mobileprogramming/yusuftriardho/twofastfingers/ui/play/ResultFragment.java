@@ -27,6 +27,9 @@ import androidx.lifecycle.ViewModelProviders;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
@@ -59,8 +62,7 @@ public class ResultFragment extends Fragment {
 //        WordViewModel mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 //        mWordViewModel.insert(new Word(String.format("%d", pViewModel.getCurrentScore())));
         PassedScoreViewModel mPassedScoreViewModel = ViewModelProviders.of(this).get(PassedScoreViewModel.class);
-        // TO DO date
-        mPassedScoreViewModel.insert(new PassedScore(pViewModel.getCurrentScore(), "dd/mm/yy\nmm:ss"));
+        mPassedScoreViewModel.insert(new PassedScore(pViewModel.getCurrentScore(), getCurrentDate()));
 
         String color;
         int score = pViewModel.getCurrentScore();
@@ -101,7 +103,7 @@ public class ResultFragment extends Fragment {
     }
 
     private void onClickShare(Context context) {
-        Bitmap bitmap = generateImg(context, R.drawable.result);
+        Bitmap bitmap = generateImg(context);
 
         try {
             File cachePath = new File(context.getCacheDir(), "tmp");
@@ -125,10 +127,10 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    private Bitmap generateImg(Context mContext,  int resourceId) {
+    private Bitmap generateImg(Context mContext) {
         try {
             Resources resources = mContext.getResources();
-            Bitmap bitmap = BitmapFactory.decodeResource(resources, resourceId);
+            Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.result);
             bitmap = bitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
 
             float scale = resources.getDisplayMetrics().density;
@@ -163,6 +165,9 @@ public class ResultFragment extends Fragment {
         return null;
     }
 
-
-
+    public String getCurrentDate() {
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy\nhh:mm:ss");
+        return df.format(c);
+    }
 }
