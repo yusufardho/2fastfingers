@@ -16,13 +16,13 @@ public class PassedScoreRepository {
     private PassedScoreDao mPassedScoreDao;
     private LiveData<List<PassedScore>> mAllPassedScores;
 
-    PassedScoreRepository(Application application) {
+    public PassedScoreRepository(Application application) {
         PassedScoreRoomDatabase db = PassedScoreRoomDatabase.getDatabase(application);
         mPassedScoreDao = db.passedScoreDao();
         mAllPassedScores = mPassedScoreDao.getAllPassedScores();
     }
 
-    LiveData<List<PassedScore>> getAllPassedScores() {
+    public LiveData<List<PassedScore>> getAllPassedScores() {
         return mAllPassedScores;
     }
 

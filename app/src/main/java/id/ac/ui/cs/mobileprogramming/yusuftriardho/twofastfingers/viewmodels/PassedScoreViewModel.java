@@ -1,4 +1,4 @@
-package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data;
+package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels;
 
 import android.app.Application;
 
@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreRepository;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
 
 public class PassedScoreViewModel extends AndroidViewModel {

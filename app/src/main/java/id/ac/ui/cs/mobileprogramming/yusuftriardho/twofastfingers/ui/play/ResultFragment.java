@@ -31,7 +31,7 @@ import java.util.Date;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreViewModel;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PassedScoreViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentResultBinding;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.ResultInterface;

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreListAdapter;
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreViewModel;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PassedScoreViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.ActivityLeaderboardBinding;
 
