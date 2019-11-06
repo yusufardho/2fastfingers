@@ -1,28 +1,39 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.ActivityMainBinding;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.MainInterface;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.MainFragment;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.SideBarFragment;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainInterface {
 
     private static boolean flag_sideBar = false;
+    private MainViewModel mainViewModel;
+    public ActivityMainBinding mainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.main_activity);
 
-        if (findViewById(R.id.sideBarFragment).getVisibility() == View.GONE) {
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mainViewModel.setSideBarText(getString(R.string.sidebar_btn));
+        mainBinding.setMainViewModel(mainViewModel);
+        mainBinding.setMainInterface(this);
+
+        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+        if (!isTablet) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.bodyFragment, MainFragment.newInstance(), null)
                     .commit();
@@ -34,21 +45,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickSideBar(View view) {
-        Button sidebarBtn = findViewById(R.id.sidebar_btn);
-
+    public void onClickSideBar() {
         if (!flag_sideBar) {
             flag_sideBar = true;
-            sidebarBtn.setText("<");
+            mainViewModel.setSideBarText(getString(R.string.back_btn));
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.bodyFragment, SideBarFragment.newInstance(), null)
                     .commit();
         } else {
             flag_sideBar = false;
-            sidebarBtn.setText(getString(R.string.sidebar_btn));
+            mainViewModel.setSideBarText(getString(R.string.sidebar_btn));
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.bodyFragment, MainFragment.newInstance(), null)
                     .commit();
         }
+        mainBinding.setMainViewModel(mainViewModel);
     }
 }

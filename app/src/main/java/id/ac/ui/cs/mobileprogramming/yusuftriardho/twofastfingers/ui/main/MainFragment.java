@@ -6,16 +6,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.PlayActivity;
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentMainBinding;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.MainInterface;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainInterface {
+
+    public FragmentMainBinding mainBinding;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -23,23 +25,22 @@ public class MainFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mainBinding = FragmentMainBinding.inflate(inflater, container, false);
+        mainBinding.setLifecycleOwner(getActivity());
+        mainBinding.setMainInterface(this);
+
+        return mainBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getView().setBackgroundColor(Color.parseColor("#03A9F4"));
+    }
 
-        Button startBtn = getView().findViewById(R.id.start_btn);
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), PlayActivity.class);
-                startActivity(intent);
-            }
-        });
+    public void onClickStart() {
+        Intent intent = new Intent(getActivity(), PlayActivity.class);
+        startActivity(intent);
     }
 }

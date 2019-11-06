@@ -15,8 +15,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,11 +33,16 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.PassedScoreViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentResultBinding;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.ResultInterface;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PlayViewModel;
 
-public class ResultFragment extends Fragment {
+public class ResultFragment extends Fragment implements ResultInterface {
 
-    private PlayViewModel pViewModel;
-    private String dispTxt;
+    private FragmentResultBinding resultBinding;
+    private PassedScoreViewModel passedScoreViewModel;
+    private PlayViewModel playViewModel;
+    private String resultText;
 
     public static ResultFragment newInstance() {
         return new ResultFragment();
@@ -48,58 +51,41 @@ public class ResultFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        resultBinding = FragmentResultBinding.inflate(inflater, container, false);
+        playViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
+        passedScoreViewModel = ViewModelProviders.of(this).get(PassedScoreViewModel.class);
+
+        resultText = String.format("%d " + getString(R.string.score_result), playViewModel.getCorrectWord());
+        playViewModel.setResultText(resultText);
+        passedScoreViewModel.insert(new PassedScore(playViewModel.getCorrectWord(), getCurrentDate()));
+
+        resultBinding.setPlayViewModel(playViewModel);
+        resultBinding.setLifecycleOwner(getActivity());
+        resultBinding.setResultInterface(this);
+
+        return resultBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        pViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
-        TextView scoreView = getView().findViewById(R.id.score);
-        dispTxt = String.format("%d " + getString(R.string.score_result), pViewModel.getCurrentScore());
-        scoreView.setText(dispTxt);
+        setBackgroundColor(getView());
+    }
 
-//        WordViewModel mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
-//        mWordViewModel.insert(new Word(String.format("%d", pViewModel.getCurrentScore())));
-        PassedScoreViewModel mPassedScoreViewModel = ViewModelProviders.of(this).get(PassedScoreViewModel.class);
-        mPassedScoreViewModel.insert(new PassedScore(pViewModel.getCurrentScore(), getCurrentDate()));
+    public void onClickMenu() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+    }
 
-        String color;
-        int score = pViewModel.getCurrentScore();
-        if (score < 10) color = "#955251";
-        else if (score < 30) color = "#DD4124";
-        else if (score < 60) color = "#EFC050";
-        else if (score < 100) color = "#009B77";
-        else color = "#92A8D1";
-        getView().setBackgroundColor(Color.parseColor(color));
+    public void onClickRetry() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.PlayActivity, PlayFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+    }
 
-        Button mainMenuBtn = getView().findViewById(R.id.main_menu_btn);
-        mainMenuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button shareBtn = getView().findViewById(R.id.share_btn);
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickShare(getActivity());
-            }
-        });
-
-        Button tryAgainBtn = getView().findViewById(R.id.try_again_btn);
-        tryAgainBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.PlayActivity, PlayFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+    public void onClickShare() {
+        onClickShare(getActivity());
     }
 
     private void onClickShare(Context context) {
@@ -127,9 +113,9 @@ public class ResultFragment extends Fragment {
         }
     }
 
-    private Bitmap generateImg(Context mContext) {
+    private Bitmap generateImg(Context context) {
         try {
-            Resources resources = mContext.getResources();
+            Resources resources = context.getResources();
             Bitmap bitmap = BitmapFactory.decodeResource(resources, R.drawable.result);
             bitmap = bitmap.copy(android.graphics.Bitmap.Config.ARGB_8888, true);
 
@@ -143,16 +129,16 @@ public class ResultFragment extends Fragment {
             paint.setTextSize((int) (220 * scale));
 
             Rect bounds = new Rect();
-            paint.getTextBounds(dispTxt, 0, dispTxt.length(), bounds);
+            paint.getTextBounds(resultText, 0, resultText.length(), bounds);
             int x = (bitmap.getWidth() - bounds.width())/7;
             int y = (bitmap.getHeight() + bounds.height())/6;
 
             // xx WPM
-            canvas.drawText(dispTxt, x * scale, y * scale, paint);
+            canvas.drawText(resultText, x * scale, y * scale, paint);
 
             paint.setTextSize((int) (50 * scale));
             x += 75;
-            if (pViewModel.getCurrentScore() >= 10) {
+            if (playViewModel.getCorrectWord() >= 10) {
                 x += 75;
             }
             y = (bitmap.getHeight() + bounds.height())/5 - 150;
@@ -169,5 +155,22 @@ public class ResultFragment extends Fragment {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy\nhh:mm:ss");
         return df.format(c);
+    }
+
+    public void setBackgroundColor(View view) {
+        final String TIER_1 = "#955251";
+        final String TIER_2 = "#DD4124";
+        final String TIER_3 = "#EFC050";
+        final String TIER_4 = "#009B77";
+        final String TIER_5 = "#92A8D1";
+
+        String color;
+        int score = playViewModel.getCorrectWord();
+        if (score < 10) color = TIER_1;
+        else if (score < 30) color = TIER_2;
+        else if (score < 60) color = TIER_3;
+        else if (score < 100) color = TIER_4;
+        else color = TIER_5;
+        view.setBackgroundColor(Color.parseColor(color));
     }
 }

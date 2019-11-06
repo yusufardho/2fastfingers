@@ -22,7 +22,7 @@ public class PassedScoreListAdapter extends RecyclerView.Adapter<PassedScoreList
 
     @Override
     public PassedScoreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        View itemView = mInflater.inflate(R.layout.recyclerview_leaderboard, parent, false);
         return new PassedScoreViewHolder(itemView);
     }
 

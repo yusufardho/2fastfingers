@@ -17,7 +17,9 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
     protected String doInBackground(Integer... param) {
         int time = param[0];
         while (time >= 0) {
-            if (isCancelled()) break;
+            if (isCancelled()) {
+                break;
+            }
             try {
                 TimeUnit.SECONDS.sleep(1);
                 publishProgress(time);

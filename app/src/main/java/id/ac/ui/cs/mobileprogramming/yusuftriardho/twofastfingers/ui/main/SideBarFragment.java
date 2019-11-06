@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +13,12 @@ import androidx.fragment.app.Fragment;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.LeaderboardActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentSidebarBinding;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.SideBarInterface;
 
-public class SideBarFragment extends Fragment {
+public class SideBarFragment extends Fragment implements SideBarInterface {
+
+    public FragmentSidebarBinding sidebarBinding;
 
     public static SideBarFragment newInstance() {
         return new SideBarFragment();
@@ -24,32 +27,29 @@ public class SideBarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sidebar, container, false);
+
+        sidebarBinding = FragmentSidebarBinding.inflate(inflater, container, false);
+        sidebarBinding.setLifecycleOwner(getActivity());
+        sidebarBinding.setSideBarInterface(this);
+
+        return sidebarBinding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         getView().setBackgroundColor(Color.parseColor("#FFFFFF"));
+    }
 
-        Button aboutBtn = getView().findViewById(R.id.about_btn);
-        aboutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.bodyFragment, AboutFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
+    public void onClickAbout() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.bodyFragment, AboutFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+    }
 
-        Button leaderboardBtn = getView().findViewById(R.id.leaderboard_btn);
-        leaderboardBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
-                startActivity(intent);
-            }
-        });
+    public void onClickLeaderboard() {
+        Intent intent = new Intent(getActivity(), LeaderboardActivity.class);
+        startActivity(intent);
     }
 }
