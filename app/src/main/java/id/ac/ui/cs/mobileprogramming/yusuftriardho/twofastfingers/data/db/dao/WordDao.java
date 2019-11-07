@@ -17,6 +17,6 @@ public interface WordDao {
     @Query("DELETE FROM word_table")
     void deleteAll();
 
-    @Query("SELECT * from word_table ORDER BY RANDOM()")
+    @Query("SELECT * from word_table")
     List<Word> getAllWords();
 }

@@ -10,6 +10,7 @@ import android.text.style.StyleSpan;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.Word;
@@ -43,7 +44,10 @@ public class PlayViewModel extends ViewModel {
     public void setResultText(String str) { this.resultText = str; }
     public String getResultText() { return this.resultText; }
 
-    public void setWords(List<Word> words) { this.words = words; }
+    public void setWords(List<Word> words) {
+        Collections.shuffle(words);
+        this.words = words;
+    }
     public List<Word> getWords() { return this.words; }
 
     private final int GREEN = Color.parseColor("#50C350");
@@ -59,7 +63,7 @@ public class PlayViewModel extends ViewModel {
         charPassed = 0;
         listColor = new ArrayList<>();
 
-        listColor.add(new DataColor(0,words.get(0).getWord().length()-1, Color.BLACK));
+        listColor.add(new DataColor(0,(words.get(0).getWord()+" ").length()-1, Color.BLACK));
         highlightTextPart(displayText, listColor);
 
         timer.execute(TIME);
@@ -70,8 +74,8 @@ public class PlayViewModel extends ViewModel {
         displayText = "";
         int current_length = 0;
         for (int i = 0; i < words.size(); i++) {
-            words.get(i).setWord(words.get(i).getWord() + " ");
-            String now = words.get(i).getWord();
+//            words.get(i).setWord(words.get(i).getWord() + " ");
+            String now = words.get(i).getWord() + " ";
             if (current_length + now.length() > THRESHOLD) {
                 displayText = displayText + "\n";
                 current_length = now.length();
@@ -84,12 +88,15 @@ public class PlayViewModel extends ViewModel {
     public void afterInputTextChanged(Editable s) {
         String lastWord = s.toString();
         if(s.toString().contains(" ")){
+            String now = words.get(pointerSelectedWords).getWord() + " ";
+            String next = words.get(pointerSelectedWords+1).getWord() + " ";
+            charPassed += now.length();
+
             // clear input box
             inputText = "";
-            charPassed += words.get(pointerSelectedWords).getWord().length();
 
             // set color
-            if (lastWord.equals(words.get(pointerSelectedWords).getWord())) {
+            if (lastWord.equals(now)) {
                 listColor.get(listColor.size()-1).color = GREEN;
                 correctWord += 1;
             } else {
@@ -101,13 +108,9 @@ public class PlayViewModel extends ViewModel {
                 listColor.clear();
                 displayText = String.valueOf(displayText).substring(charPassed+1);
                 charPassed = 0;
-                listColor.add(new DataColor(0,
-                        words.get(pointerSelectedWords+1).getWord().length()-1,
-                        Color.BLACK));
+                listColor.add(new DataColor(0,next.length()-1, Color.BLACK));
             } else {
-                listColor.add(new DataColor(charPassed,
-                        charPassed+words.get(pointerSelectedWords+1).getWord().length()-1,
-                        Color.BLACK));
+                listColor.add(new DataColor(charPassed, charPassed+next.length()-1, Color.BLACK));
             }
 
             // highlight word
