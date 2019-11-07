@@ -57,7 +57,9 @@ public class ResultFragment extends Fragment implements ResultInterface {
 
         resultText = String.format("%d " + getString(R.string.score_result), playViewModel.getCorrectWord());
         playViewModel.setResultText(resultText);
-        passedScoreViewModel.insert(new PassedScore(playViewModel.getCorrectWord(), getCurrentDate()));
+        if (playViewModel.getCorrectWord() > 0) {
+            passedScoreViewModel.insert(new PassedScore(playViewModel.getCorrectWord(), getCurrentDate()));
+        }
 
         resultBinding.setPlayViewModel(playViewModel);
         resultBinding.setLifecycleOwner(getActivity());
