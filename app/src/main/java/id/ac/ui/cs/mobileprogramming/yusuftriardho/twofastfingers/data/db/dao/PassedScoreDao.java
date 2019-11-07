@@ -15,9 +15,6 @@ public interface PassedScoreDao {
     @Insert
     void insert(PassedScore passedScore);
 
-    @Query("DELETE FROM passed_score_table")
-    void deleteAll();
-
     @Query("SELECT * from passed_score_table ORDER BY score DESC LIMIT 10")
     LiveData<List<PassedScore>> getAllPassedScores();
 }

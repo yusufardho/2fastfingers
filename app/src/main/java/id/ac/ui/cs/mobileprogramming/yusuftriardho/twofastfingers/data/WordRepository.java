@@ -3,8 +3,6 @@ package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.dao.WordDao;
@@ -14,15 +12,15 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity
 public class WordRepository {
 
     private WordDao mWordDao;
-    private LiveData<List<Word>> mAllWords;
+    private List<Word> mAllWords;
 
-    WordRepository(Application application) {
+    public WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
         mWordDao = db.wordDao();
         mAllWords = mWordDao.getAllWords();
     }
 
-    LiveData<List<Word>> getAllWords() {
+    public List<Word> getAllWords() {
         return mAllWords;
     }
 

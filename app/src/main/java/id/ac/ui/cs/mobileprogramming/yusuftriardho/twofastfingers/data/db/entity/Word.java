@@ -20,4 +20,6 @@ public class Word {
     public String getWord(){
         return this.mWord;
     }
+
+    public void setWord(String word) { this.mWord = word; }
 }

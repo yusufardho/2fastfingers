@@ -2,7 +2,6 @@ package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers;
 
 import android.os.Bundle;
 import android.view.Window;
-import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -24,8 +23,6 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mainViewModel.setSideBarText(getString(R.string.sidebar_btn));
