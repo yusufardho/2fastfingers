@@ -63,7 +63,7 @@ public class PlayViewModel extends ViewModel {
 
     public void initPlay(boolean isTablet) {
         //  inputText = "";
-        //  correctWord = 0;
+        correctWord = 0;
         initDisplayWords(isTablet);
         //  pointerSelectedWords = 0;
         // charPassed = 0;
