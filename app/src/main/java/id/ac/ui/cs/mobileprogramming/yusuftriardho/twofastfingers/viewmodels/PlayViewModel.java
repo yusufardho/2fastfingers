@@ -76,7 +76,7 @@ public class PlayViewModel extends ViewModel {
     }
 
     public void initDisplayWords(boolean isTablet) {
-        int THRESHOLD = (isTablet ? 50 : 35);
+        int THRESHOLD = (isTablet ? 80 : 35);
         displayText = "";
         int current_length = 0;
         for (int i = 0; i < words.size(); i++) {

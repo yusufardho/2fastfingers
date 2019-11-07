@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             tools:text="30 WPM" />
 
     </LinearLayout>

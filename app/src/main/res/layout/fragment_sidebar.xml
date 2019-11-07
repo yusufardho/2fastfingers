@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/grey_btn"
             android:id="@+id/about_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +24,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/leaderboard_btn" />
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/orange_btn"
+            android:textSize="12dp"
             android:id="@+id/leaderboard_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

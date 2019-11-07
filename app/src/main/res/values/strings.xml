@@ -6,7 +6,7 @@
     <string name="about_sidebar_btn">about</string>
     <string name="leaderboard_sidebar_btn">leaderboard</string>
 
-    <string name="main_fragment_title">2 Fast Finger</string>
+    <string name="main_fragment_title">2 Fast Fingers</string>
 
     <string name="back_btn"><![CDATA[<]]></string>
     <string name="app_version">2 fast fingers vx.x.x</string>
@@ -22,10 +22,8 @@
     <string name="try_again_btn">try again</string>
     <string name="score_result">WPM</string>
     <string name="timer_display">%ds</string>
-    <string name="no_contact_found">No contacts found.</string>
-    <string name="read_contact_per_disabled">Contacts permission must be allowed.</string>
-    <string name="exit_play">X</string>
-    <string name="share_msg">Hi %s, I can type %d words per minute! Are you faster? let\'s play 2 fast fingers now.</string>
+    <string name="exit_play">x</string>
     <string name="WPMstand">(words per minute)</string>
     <string name="title_share">Choose an app</string>
+    <string name="top_10_score">Top 10 Score</string>
 </resources>

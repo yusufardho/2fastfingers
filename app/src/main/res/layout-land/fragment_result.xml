@@ -19,7 +19,7 @@
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sample_result"
+            android:text="@{playViewModel.getResultText()}"
             android:textSize="70sp"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"

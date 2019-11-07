@@ -73,6 +73,14 @@ public class PlayFragment extends Fragment implements PlayInterface {
         onFinishState();
     }
 
+    public void onClickRetry() {
+        playViewModel.forceStopTimer();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.PlayActivity, PlayFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+    }
+
 
     public void onFinishState() {
         playViewModel.setCorrectWord(playViewModel.getCorrectWord());

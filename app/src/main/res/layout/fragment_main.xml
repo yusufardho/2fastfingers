@@ -35,7 +35,9 @@
             app:layout_constraintVertical_bias="0.26999998"
             app:srcCompat="@drawable/logo_round" />
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/orange_btn"
+            android:textSize="20dp"
             android:id="@+id/start_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

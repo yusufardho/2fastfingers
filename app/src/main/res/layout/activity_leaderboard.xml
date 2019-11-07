@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#B4B4B4"
         tools:context=".LeaderboardActivity">
 
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/grey_btn"
+            android:onClick="onClickBack"
+            android:text="@string/back_btn"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
         <TextView
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#B4B4B4"
-            android:text="Top 10 Score"
+            android:fontFamily="@font/zcool"
+            android:text="@string/top_10_score"
             android:textAlignment="center"
-            android:textSize="50sp" />
+            android:textSize="40sp"
+            android:textStyle="bold"/>
         <include
             layout="@layout/content_leaderboard"
             android:layout_marginTop="65dp"

@@ -15,7 +15,9 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:textSize="15dp"
+            android:background="@drawable/red_btn"
             android:id="@+id/back_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -24,6 +26,19 @@
             android:text="@string/exit_play"
             android:onClick="@{() -> playInterface.onClickExit()}"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:textSize="23dp"
+            android:background="@drawable/green_btn"
+            android:textStyle="bold"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:onClick="@{() -> playInterface.onClickRetry()}"
+            android:text="@string/refresh_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

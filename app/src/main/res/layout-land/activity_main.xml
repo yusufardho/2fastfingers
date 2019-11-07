@@ -22,10 +22,13 @@
             android:layout_height="69dp"
             android:background="#03A9F4">
 
-            <Button
+            <Button style="@style/Widget.AppCompat.Button.Colored"
+                android:background="@drawable/white_btn"
+                android:textColor="#a8a8a8"
                 android:id="@+id/sidebar_btn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:textSize="25dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:onClick="@{() -> mainInterface.onClickSideBar()}"

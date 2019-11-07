@@ -23,10 +23,8 @@
     <string name="try_again_btn">coba lagi</string>
     <string name="score_result">KPM</string>
     <string name="timer_display">%dd</string>
-    <string name="no_contact_found">tidak ada kontak.</string>
-    <string name="read_contact_per_disabled">ijinkan kontak terlebih dahulu.</string>
-    <string name="exit_play">X</string>
-    <string name="share_msg">Halo %s, Aku bisa mengetik %d kata per menit! kamu lebih cepat? yuk main 2 fast fingers sekarang.</string>
+    <string name="exit_play">x</string>
     <string name="WPMstand">(kata per menit)</string>
     <string name="title_share">Pilih aplikasi</string>
+    <string name="top_10_score">Skor 10 Terbaik</string>
 </resources>
