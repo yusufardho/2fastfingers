@@ -18,6 +18,7 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools.CallRece
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.MainFragment;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.SideBarFragment;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.MainViewModel;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PlayViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.WordViewModel;
 
 public class MainActivity extends AppCompatActivity implements MainInterface {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
     private static boolean flag_sideBar = false;
     private MainViewModel mainViewModel;
     private WordViewModel wordViewModel;
+    private PlayViewModel playViewModel;
     public ActivityMainBinding mainBinding;
     private CallReceiver callReceiver;
 
@@ -39,9 +41,13 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         wordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+        playViewModel = ViewModelProviders.of(this).get(PlayViewModel.class);
+
         mainViewModel.setSideBarText(getString(R.string.sidebar_btn));
         mainBinding.setMainViewModel(mainViewModel);
         mainBinding.setMainInterface(this);
+
+        playViewModel.forceStopTimer();
 
         boolean isTablet = getResources().getBoolean(R.bool.isTablet);
         if (!isTablet) {

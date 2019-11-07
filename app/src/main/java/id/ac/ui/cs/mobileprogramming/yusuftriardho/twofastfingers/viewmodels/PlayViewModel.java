@@ -19,7 +19,7 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFr
 
 public class PlayViewModel extends ViewModel {
 
-    private final int TIME = 59;
+    private int TIME = 59;
     private String timerBox, inputText, resultText;
     private CharSequence displayText;
     private int correctWord;
@@ -55,6 +55,12 @@ public class PlayViewModel extends ViewModel {
     private int pointerSelectedWords, charPassed;
     private ArrayList<DataColor> listColor;
 
+    public void forceStopTimer() {
+        if (timer != null) {
+            timer.cancel(true);
+        }
+    }
+
     public void initPlay(boolean isTablet) {
         inputText = "";
         correctWord = 0;
@@ -74,7 +80,6 @@ public class PlayViewModel extends ViewModel {
         displayText = "";
         int current_length = 0;
         for (int i = 0; i < words.size(); i++) {
-//            words.get(i).setWord(words.get(i).getWord() + " ");
             String now = words.get(i).getWord() + " ";
             if (current_length + now.length() > THRESHOLD) {
                 displayText = displayText + "\n";

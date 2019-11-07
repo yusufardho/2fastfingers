@@ -34,6 +34,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
         playViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         wordViewModel = ViewModelProviders.of(getActivity()).get(WordViewModel.class);
 
+        playViewModel.forceStopTimer();
         playViewModel.setWords(wordViewModel.getAllWords());
         playViewModel.setTimer(this);
         playViewModel.initPlay(getResources().getBoolean(R.bool.isTablet));
@@ -52,9 +53,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
     }
 
     public void onClickExit() {
-        if (playViewModel.getTimer() != null) {
-            playViewModel.getTimer().cancel(true);
-        }
+        playViewModel.forceStopTimer();
         onFinishState();
     }
 

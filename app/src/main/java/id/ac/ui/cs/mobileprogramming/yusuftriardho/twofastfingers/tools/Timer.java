@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFragment;
 
-public class Timer extends AsyncTask<Integer, Integer, String> {
+public class Timer extends AsyncTask<Integer, Integer,  Integer> {
     private PlayFragment playFragment;
 
     public Timer(PlayFragment playFragment) {
@@ -14,7 +14,7 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(Integer... param) {
+    protected Integer doInBackground(Integer... param) {
         int time = param[0];
         while (time >= 0) {
             if (isCancelled()) {
@@ -26,7 +26,7 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
             } catch (InterruptedException ignored) {}
             time--;
         }
-        return "thread done";
+        return time;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Timer extends AsyncTask<Integer, Integer, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Integer result) {
         playFragment.onFinishState();
     }
 }
