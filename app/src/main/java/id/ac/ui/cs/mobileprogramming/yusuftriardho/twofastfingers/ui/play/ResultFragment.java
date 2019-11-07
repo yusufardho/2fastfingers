@@ -159,7 +159,7 @@ public class ResultFragment extends Fragment implements ResultInterface {
 
     public void setBackgroundColor(View view) {
         final String TIER_1 = "#955251";
-        final String TIER_2 = "#DD4124";
+        final String TIER_2 = "#F1B3A7";
         final String TIER_3 = "#EFC050";
         final String TIER_4 = "#009B77";
         final String TIER_5 = "#92A8D1";
