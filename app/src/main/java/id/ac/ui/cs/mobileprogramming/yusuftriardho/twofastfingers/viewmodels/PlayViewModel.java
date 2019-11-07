@@ -50,10 +50,10 @@ public class PlayViewModel extends ViewModel {
     }
     public List<Word> getWords() { return this.words; }
 
-    private final int GREEN = Color.parseColor("#50C350");
-    private final int RED = Color.RED;
-    private int pointerSelectedWords, charPassed;
-    private ArrayList<DataColor> listColor;
+    public final int GREEN = Color.parseColor("#50C350");
+    public final int RED = Color.RED;
+    public int pointerSelectedWords, charPassed;
+    public ArrayList<DataColor> listColor;
 
     public void forceStopTimer() {
         if (timer != null) {
@@ -62,15 +62,15 @@ public class PlayViewModel extends ViewModel {
     }
 
     public void initPlay(boolean isTablet) {
-        inputText = "";
-        correctWord = 0;
+        //  inputText = "";
+        //  correctWord = 0;
         initDisplayWords(isTablet);
-        pointerSelectedWords = 0;
-        charPassed = 0;
-        listColor = new ArrayList<>();
+        //  pointerSelectedWords = 0;
+        // charPassed = 0;
+        // listColor = new ArrayList<>();
 
-        listColor.add(new DataColor(0,(words.get(0).getWord()+" ").length()-1, Color.BLACK));
-        highlightTextPart(displayText, listColor);
+        // listColor.add(new DataColor(0,(words.get(0).getWord()+" ").length()-1, Color.BLACK));
+        // highlightTextPart(displayText, listColor);
 
         timer.execute(TIME);
     }
