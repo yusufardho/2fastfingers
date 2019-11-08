@@ -1,15 +1,9 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels;
 
 import android.graphics.Color;
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,9 +43,6 @@ public class PlayViewModel extends ViewModel {
     public void setTIME(int time) { this.TIME = time; }
     public int getTIME() {return this.TIME; }
 
-    public void setIsFromPause(boolean f) { this.isFromPause = f; }
-    public boolean getIsFromPause() { return this.isFromPause; }
-
     public void setWords(List<Word> words) {
         Collections.shuffle(words);
         this.words = words;
@@ -60,8 +51,6 @@ public class PlayViewModel extends ViewModel {
 
     public final int GREEN = Color.parseColor("#50C350");
     public final int RED = Color.RED;
-    public int pointerSelectedWords, charPassed;
-    public ArrayList<DataColor> listColor;
 
     public void forceStopTimer() {
         if (timer != null) {
@@ -74,12 +63,6 @@ public class PlayViewModel extends ViewModel {
         inputText = "";
         correctWord = 0;
         initDisplayWords(isTablet);
-        //  pointerSelectedWords = 0;
-        // charPassed = 0;
-        // listColor = new ArrayList<>();
-
-        // listColor.add(new DataColor(0,(words.get(0).getWord()+" ").length()-1, Color.BLACK));
-        // highlightTextPart(displayText, listColor);
 
         timer.execute(TIME);
     }
@@ -96,59 +79,6 @@ public class PlayViewModel extends ViewModel {
             }
             displayText = displayText + now;
             current_length += now.length();
-        }
-    }
-
-    public void afterInputTextChanged(Editable s) {
-        String lastWord = s.toString();
-        if(s.toString().contains(" ")){
-            String now = words.get(pointerSelectedWords).getWord() + " ";
-            String next = words.get(pointerSelectedWords+1).getWord() + " ";
-            charPassed += now.length();
-
-            // clear input box
-            inputText = "";
-
-            // set color
-            if (lastWord.equals(now)) {
-                listColor.get(listColor.size()-1).color = GREEN;
-                correctWord += 1;
-            } else {
-                listColor.get(listColor.size()-1).color = RED;
-            }
-
-            // change line
-            if (displayText.charAt(charPassed) == '\n') {
-                listColor.clear();
-                displayText = String.valueOf(displayText).substring(charPassed+1);
-                charPassed = 0;
-                listColor.add(new DataColor(0,next.length()-1, Color.BLACK));
-            } else {
-                listColor.add(new DataColor(charPassed, charPassed+next.length()-1, Color.BLACK));
-            }
-
-            // highlight word
-            highlightTextPart(displayText, listColor);
-            pointerSelectedWords++;
-        }
-    }
-
-    public void highlightTextPart(CharSequence fullText, ArrayList<DataColor> listColor) {
-        Spannable spannable = new SpannableString(fullText);
-        for (DataColor dataColor: listColor) {
-            spannable.setSpan(new ForegroundColorSpan(dataColor.color), dataColor.left, dataColor.right, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannable.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), dataColor.left, dataColor.right, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        displayText = spannable;
-    }
-
-    public class DataColor {
-        int left, right, color;
-
-        public DataColor(int left, int right, int color) {
-            this.left = left;
-            this.right = right;
-            this.color = color;
         }
     }
 }

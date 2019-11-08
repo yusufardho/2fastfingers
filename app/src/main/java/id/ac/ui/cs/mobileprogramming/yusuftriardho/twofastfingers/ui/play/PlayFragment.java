@@ -51,8 +51,8 @@ public class PlayFragment extends Fragment implements PlayInterface {
         playViewModel.forceStopTimer();
         playViewModel.setWords(wordViewModel.getAllWords());
         playViewModel.setTimer(this);
-        if (playViewModel.getTIME() == 0) playViewModel.setIsFromPause(false);
-        if (!playViewModel.getIsFromPause()) playViewModel.setTIME(59);
+        if (playViewModel.getTIME() == 0) playViewModel.isFromPause = false;
+        if (!playViewModel.isFromPause) playViewModel.setTIME(59);
         playViewModel.initPlay(getResources().getBoolean(R.bool.isTablet));
 
         playBinding.setPlayViewModel(playViewModel);
@@ -87,7 +87,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
 
     public void onFinishState() {
         playViewModel.setCorrectWord(playViewModel.getCorrectWord());
-        playViewModel.setIsFromPause(false);
+        playViewModel.isFromPause = false;
         getFragmentManager().beginTransaction()
                 .replace(R.id.PlayActivity, ResultFragment.newInstance())
                 .addToBackStack(null)

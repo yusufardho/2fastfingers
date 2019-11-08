@@ -44,7 +44,7 @@ public class PlayActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             playViewModel.forceStopTimer();
-            playViewModel.setIsFromPause(true);
+            playViewModel.isFromPause = true;
 
             if (!playViewModel.ignoreReceiver) {
                 getSupportFragmentManager().beginTransaction()
