@@ -4,6 +4,9 @@
         <variable
             name="mainViewModel"
             type="id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.MainViewModel" />
+        <variable
+            name="versionHistoryViewModel"
+            type="id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.VersionHistoryViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,7 +19,7 @@
             android:id="@+id/textVer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{mainViewModel.APP_VER}"
+            android:text="@string/app_version"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

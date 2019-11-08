@@ -19,12 +19,14 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFr
 
 public class PlayViewModel extends ViewModel {
 
-    private int TIME = 59;
+    // private int TIME = 59;
     private String timerBox, inputText, resultText;
     private CharSequence displayText;
     private int correctWord;
     private List<Word> words;
     public Timer timer;
+    public int TIME;
+    public boolean isFromPause, ignoreReceiver;
 
     public void setCorrectWord(int cnt) { this.correctWord = cnt; }
     public int getCorrectWord() { return this.correctWord; }
@@ -44,6 +46,12 @@ public class PlayViewModel extends ViewModel {
     public void setResultText(String str) { this.resultText = str; }
     public String getResultText() { return this.resultText; }
 
+    public void setTIME(int time) { this.TIME = time; }
+    public int getTIME() {return this.TIME; }
+
+    public void setIsFromPause(boolean f) { this.isFromPause = f; }
+    public boolean getIsFromPause() { return this.isFromPause; }
+
     public void setWords(List<Word> words) {
         Collections.shuffle(words);
         this.words = words;
@@ -62,7 +70,8 @@ public class PlayViewModel extends ViewModel {
     }
 
     public void initPlay(boolean isTablet) {
-        //  inputText = "";
+        isFromPause = false;
+        inputText = "";
         correctWord = 0;
         initDisplayWords(isTablet);
         //  pointerSelectedWords = 0;

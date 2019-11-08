@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +19,8 @@ public class Timer extends AsyncTask<Integer, Integer,  Integer> {
         int time = param[0];
         while (time >= 0) {
             if (isCancelled()) {
+                playFragment.setTIME(time);
+                Log.d(">>","isCancelled() "+time);
                 break;
             }
             try {
@@ -37,5 +40,6 @@ public class Timer extends AsyncTask<Integer, Integer,  Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         playFragment.onFinishState();
+        Log.d(">>>","onPostExecute() "+result);
     }
 }

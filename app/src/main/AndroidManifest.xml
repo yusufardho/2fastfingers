@@ -27,9 +27,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
-        <receiver android:name=".tools.CallReceiver"
-            android:enabled="true"
-            android:exported="true">
+        <receiver android:name=".tools.CallReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>

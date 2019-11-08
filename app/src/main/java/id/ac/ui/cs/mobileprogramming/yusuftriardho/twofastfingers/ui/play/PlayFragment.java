@@ -33,7 +33,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
 
 
     private FragmentPlayBinding playBinding;
-    private PlayViewModel playViewModel;
+    public PlayViewModel playViewModel;
     private WordViewModel wordViewModel;
 
     public static PlayFragment newInstance() {
@@ -47,9 +47,12 @@ public class PlayFragment extends Fragment implements PlayInterface {
         playViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         wordViewModel = ViewModelProviders.of(getActivity()).get(WordViewModel.class);
 
+        playViewModel.ignoreReceiver = false;
         playViewModel.forceStopTimer();
         playViewModel.setWords(wordViewModel.getAllWords());
         playViewModel.setTimer(this);
+        if (playViewModel.getTIME() == 0) playViewModel.setIsFromPause(false);
+        if (!playViewModel.getIsFromPause()) playViewModel.setTIME(59);
         playViewModel.initPlay(getResources().getBoolean(R.bool.isTablet));
 
         playBinding.setPlayViewModel(playViewModel);
@@ -84,6 +87,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
 
     public void onFinishState() {
         playViewModel.setCorrectWord(playViewModel.getCorrectWord());
+        playViewModel.setIsFromPause(false);
         getFragmentManager().beginTransaction()
                 .replace(R.id.PlayActivity, ResultFragment.newInstance())
                 .addToBackStack(null)
@@ -93,6 +97,11 @@ public class PlayFragment extends Fragment implements PlayInterface {
     public void setTimer(int currentSec) {
         playViewModel.setTimerBox(String.format(getString(R.string.timer_display), currentSec));
         playBinding.setPlayViewModel(playViewModel);
+    }
+
+    public void setTIME(int time) {
+        if (time < 0) playViewModel.setTIME(59);
+        else playViewModel.setTIME(time);
     }
 
     private EditText input;

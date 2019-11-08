@@ -10,7 +10,7 @@
     <string name="main_fragment_title">2 Fast Fingers</string>
 
     <string name="back_btn"><![CDATA[<]]></string>
-    <string name="app_version">2 fast fingers vx.x.x</string>
+    <string name="app_version">v1.1 - 6/11/19\nv1.0 - 1/11/19</string>
     <string name="start_btn">mulai</string>
     <string name="refresh_btn">⟲</string>
     <string name="init_timer">59</string>
@@ -27,4 +27,6 @@
     <string name="WPMstand">(kata per menit)</string>
     <string name="title_share">Pilih aplikasi</string>
     <string name="top_10_score">Skor 10 Terbaik</string>
+    <string name="incoming_call_detected">PANGGILAN TELFON MASUK</string>
+    <string name="resume_btn">LANJUT</string>
 </resources>

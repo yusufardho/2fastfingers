@@ -8,6 +8,6 @@ public class CallReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TO DO
+        context.sendBroadcast(new Intent("INCOMING_CALL_DETECTED"));
     }
 }

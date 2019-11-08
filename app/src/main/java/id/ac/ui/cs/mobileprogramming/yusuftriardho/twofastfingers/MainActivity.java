@@ -1,7 +1,6 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers;
 
 import android.Manifest;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Window;
@@ -14,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.ActivityMainBinding;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.MainInterface;
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools.CallReceiver;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.MainFragment;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main.SideBarFragment;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.MainViewModel;
@@ -28,15 +26,11 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
     private WordViewModel wordViewModel;
     private PlayViewModel playViewModel;
     public ActivityMainBinding mainBinding;
-    private CallReceiver callReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        callReceiver = new CallReceiver();
-        registerReceiver(callReceiver, new IntentFilter());
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
@@ -83,11 +77,5 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
                     .commit();
         }
         mainBinding.setMainViewModel(mainViewModel);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(callReceiver);
     }
 }

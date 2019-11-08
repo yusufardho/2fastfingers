@@ -55,6 +55,7 @@ public class ResultFragment extends Fragment implements ResultInterface {
         playViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         passedScoreViewModel = ViewModelProviders.of(this).get(PassedScoreViewModel.class);
 
+        playViewModel.ignoreReceiver = true;
         resultText = String.format("%d " + getString(R.string.score_result), playViewModel.getCorrectWord());
         playViewModel.setResultText(resultText);
         if (playViewModel.getCorrectWord() > 0) {
