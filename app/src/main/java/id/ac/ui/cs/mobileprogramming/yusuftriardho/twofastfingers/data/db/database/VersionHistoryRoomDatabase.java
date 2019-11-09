@@ -58,7 +58,6 @@ public abstract class VersionHistoryRoomDatabase extends RoomDatabase {
             mDao.deleteAll();
 
             for(String vh: version_history) {
-                Log.d(">>>>>>>>>>","GGGGGGGGGG");
                 String[] tmp = vh.split(" ");
                 mDao.insert(new VersionHistory(tmp[0], tmp[1]));
             }
