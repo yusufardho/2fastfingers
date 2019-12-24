@@ -10,11 +10,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,10 +34,10 @@ import java.util.Date;
 
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PassedScoreViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.PassedScore;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentResultBinding;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.ResultInterface;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PassedScoreViewModel;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels.PlayViewModel;
 
 public class ResultFragment extends Fragment implements ResultInterface {
@@ -88,7 +91,12 @@ public class ResultFragment extends Fragment implements ResultInterface {
     }
 
     public void onClickShare() {
-        onClickShare(getActivity());
+        if (isConnect()) {
+            onClickShare(getActivity());
+        } else {
+            Toast toast = Toast.makeText(getActivity(), getString(R.string.no_internet_msg), Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private void onClickShare(Context context) {
@@ -114,6 +122,17 @@ public class ResultFragment extends Fragment implements ResultInterface {
                     .putExtra(Intent.EXTRA_STREAM, contentUri);
             startActivity(Intent.createChooser(shareIntent, getString(R.string.title_share)));
         }
+    }
+
+    @SuppressWarnings("deprecation")
+    private boolean isConnect() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
     }
 
     private Bitmap generateImg(Context context) {
