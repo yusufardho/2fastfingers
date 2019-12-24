@@ -29,4 +29,5 @@
     <string name="top_10_score">Skor 10 Terbaik</string>
     <string name="incoming_call_detected">PANGGILAN TELFON MASUK</string>
     <string name="resume_btn">LANJUT</string>
+    <string name="no_internet_msg">You need internet connection to share</string>
 </resources>

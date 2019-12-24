@@ -28,4 +28,5 @@
     <string name="top_10_score">Top 10 Score</string>
     <string name="incoming_call_detected">INCOMING CALL DETECTED</string>
     <string name="resume_btn">RESUME</string>
+    <string name="no_internet_msg">You need internet connection to share</string>
 </resources>
