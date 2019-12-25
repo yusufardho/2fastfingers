@@ -30,4 +30,7 @@
     <string name="incoming_call_detected">PANGGILAN TELFON MASUK</string>
     <string name="resume_btn">LANJUT</string>
     <string name="no_internet_msg">You need internet connection to share</string>
+    <string name="ignore">Abaikan</string>
+    <string name="ok">Oke</string>
+    <string name="why_need_phone_perm">Terima permintaan phone permission untuk pause ketika panggilan telfon masuk.</string>
 </resources>

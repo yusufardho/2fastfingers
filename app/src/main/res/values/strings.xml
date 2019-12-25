@@ -29,4 +29,7 @@
     <string name="incoming_call_detected">INCOMING CALL DETECTED</string>
     <string name="resume_btn">RESUME</string>
     <string name="no_internet_msg">You need internet connection to share</string>
+    <string name="ignore">Ignore</string>
+    <string name="ok">Ok</string>
+    <string name="why_need_phone_perm">Please accept phone permission for pausing the game while incoming call detected.</string>
 </resources>

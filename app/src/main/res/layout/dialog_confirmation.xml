@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Please accept phone permission for pausing the game while incoming call detected"
+            android:text="@string/why_need_phone_perm"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

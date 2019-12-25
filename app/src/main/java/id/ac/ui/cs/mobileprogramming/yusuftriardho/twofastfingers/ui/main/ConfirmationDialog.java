@@ -23,13 +23,13 @@ public class ConfirmationDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_confirmation, null);
         builder.setView(view)
-                .setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.ignore), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ((MainActivity)getActivity()).startPlay();
                     }
                 })
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 1);
