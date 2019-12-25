@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.main;
 
-import android.content.Intent;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,9 +10,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.PlayActivity;
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.MainActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentMainBinding;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.interfaces.fragments.MainInterface;
 
@@ -40,7 +42,15 @@ public class MainFragment extends Fragment implements MainInterface {
     }
 
     public void onClickStart() {
-        Intent intent = new Intent(getActivity(), PlayActivity.class);
-        startActivity(intent);
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ConfirmationDialog confDialog = new ConfirmationDialog();
+            confDialog.show(getFragmentManager(), "confirmation dialog");
+        } else {
+            /* Already allow the permission */
+            ((MainActivity)getActivity()).startPlay();
+        }
     }
+
+
 }

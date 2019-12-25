@@ -1,13 +1,10 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -54,12 +51,6 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
                     .add(R.id.sideBarFragment, SideBarFragment.newInstance(), null)
                     .commit();
         }
-
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_PHONE_STATE},1);
-        }
     }
 
     public void onClickSideBar() {
@@ -77,5 +68,17 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
                     .commit();
         }
         mainBinding.setMainViewModel(mainViewModel);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Intent intent = new Intent(this, PlayActivity.class);
+        startActivity(intent);
+    }
+
+    public void startPlay() {
+        Intent intent = new Intent(this, PlayActivity.class);
+        startActivity(intent);
     }
 }
