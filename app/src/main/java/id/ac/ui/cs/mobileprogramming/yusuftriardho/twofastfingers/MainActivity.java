@@ -73,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Intent intent = new Intent(this, PlayActivity.class);
-        startActivity(intent);
+        startPlay();
     }
 
     public void startPlay() {
