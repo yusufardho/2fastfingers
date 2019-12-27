@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProviders;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.PlayActivity;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.R;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.data.db.entity.Word;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.databinding.FragmentPlayBinding;
@@ -46,6 +47,9 @@ public class PlayFragment extends Fragment implements PlayInterface {
         playBinding = FragmentPlayBinding.inflate(inflater, container, false);
         playViewModel = ViewModelProviders.of(getActivity()).get(PlayViewModel.class);
         wordViewModel = ViewModelProviders.of(getActivity()).get(WordViewModel.class);
+
+        if (!playViewModel.isFromPause)
+            ((PlayActivity)getActivity()).startService(59);
 
         playViewModel.ignoreReceiver = false;
         playViewModel.forceStopTimer();
@@ -72,12 +76,12 @@ public class PlayFragment extends Fragment implements PlayInterface {
     }
 
     public void onClickExit() {
-        playViewModel.forceStopTimer();
         onFinishState();
     }
 
     public void onClickRetry() {
-        playViewModel.forceStopTimer();
+        ((PlayActivity)getActivity()).clear();
+
         getFragmentManager().beginTransaction()
                 .replace(R.id.PlayActivity, PlayFragment.newInstance())
                 .addToBackStack(null)
@@ -86,6 +90,8 @@ public class PlayFragment extends Fragment implements PlayInterface {
 
 
     public void onFinishState() {
+        ((PlayActivity)getActivity()).clear();
+
         playViewModel.setCorrectWord(playViewModel.getCorrectWord());
         playViewModel.isFromPause = false;
         getFragmentManager().beginTransaction()
@@ -95,7 +101,10 @@ public class PlayFragment extends Fragment implements PlayInterface {
     }
 
     public void setTimer(int currentSec) {
-        playViewModel.setTimerBox(String.format(getString(R.string.timer_display), currentSec));
+        try {
+            playViewModel.setTimerBox(String.format(getString(R.string.timer_display), currentSec));
+            ((PlayActivity)getActivity()).mPNS.updateNotification(String.valueOf(currentSec));
+        } catch (Exception ignored) {}
         playBinding.setPlayViewModel(playViewModel);
     }
 
@@ -181,4 +190,6 @@ public class PlayFragment extends Fragment implements PlayInterface {
 
         public void setColor(int color) { this.color = color; }
     }
+
+
 }

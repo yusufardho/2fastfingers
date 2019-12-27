@@ -33,4 +33,8 @@
     <string name="ignore">Abaikan</string>
     <string name="ok">Oke</string>
     <string name="why_need_phone_perm">Terima permintaan phone permission untuk pause ketika panggilan telfon masuk.</string>
+
+
+    <string name="is_running">2 fast fingers sedang berjalan. Buka untuk melanjutkan!</string>
+    <string name="second_left">detik lagi</string>
 </resources>

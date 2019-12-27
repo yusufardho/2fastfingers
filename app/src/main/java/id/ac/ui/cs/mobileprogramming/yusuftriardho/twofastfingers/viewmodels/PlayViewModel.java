@@ -13,7 +13,6 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFr
 
 public class PlayViewModel extends ViewModel {
 
-    // private int TIME = 59;
     private String timerBox, inputText, resultText;
     private CharSequence displayText;
     private int correctWord;
@@ -44,6 +43,8 @@ public class PlayViewModel extends ViewModel {
     public int getTIME() {return this.TIME; }
 
     public void setWords(List<Word> words) {
+        // TO DO
+
         Collections.shuffle(words);
         this.words = words;
     }

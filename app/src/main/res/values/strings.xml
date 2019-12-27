@@ -32,4 +32,7 @@
     <string name="ignore">Ignore</string>
     <string name="ok">Ok</string>
     <string name="why_need_phone_perm">Please accept phone permission for pausing the game while incoming call detected.</string>
+
+    <string name="is_running">2 fast fingers is running. Open to continue!</string>
+    <string name="second_left">second left</string>
 </resources>
