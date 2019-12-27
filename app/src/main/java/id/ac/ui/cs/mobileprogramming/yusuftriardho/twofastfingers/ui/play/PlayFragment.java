@@ -144,7 +144,7 @@ public class PlayFragment extends Fragment implements PlayInterface {
                     input.getText().clear();
 
                     // set color
-                    if (lastWord.equals(now)) {
+                    if (lastWord.equals(playViewModel.decryptWord(now))) {
                         listColor.get(listColor.size()-1).setColor(playViewModel.GREEN);
                         playViewModel.setCorrectWord(playViewModel.getCorrectWord()+1);
                     } else {

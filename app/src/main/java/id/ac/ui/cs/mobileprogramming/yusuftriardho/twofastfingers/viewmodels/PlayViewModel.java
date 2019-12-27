@@ -1,6 +1,7 @@
 package id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.viewmodels;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
@@ -12,6 +13,10 @@ import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.tools.Timer;
 import id.ac.ui.cs.mobileprogramming.yusuftriardho.twofastfingers.ui.play.PlayFragment;
 
 public class PlayViewModel extends ViewModel {
+
+    static {
+        System.loadLibrary("native-lib");
+    }
 
     private String timerBox, inputText, resultText;
     private CharSequence displayText;
@@ -43,8 +48,6 @@ public class PlayViewModel extends ViewModel {
     public int getTIME() {return this.TIME; }
 
     public void setWords(List<Word> words) {
-        // TO DO
-
         Collections.shuffle(words);
         this.words = words;
     }
@@ -73,7 +76,8 @@ public class PlayViewModel extends ViewModel {
         displayText = "";
         int current_length = 0;
         for (int i = 0; i < words.size(); i++) {
-            String now = words.get(i).getWord() + " ";
+            String now = decryptWord(words.get(i).getWord()) + " ";
+            Log.d(">>",now);
             if (current_length + now.length() > THRESHOLD) {
                 displayText = displayText + "\n";
                 current_length = now.length();
@@ -82,4 +86,6 @@ public class PlayViewModel extends ViewModel {
             current_length += now.length();
         }
     }
+
+    public native String decryptWord(String word);
 }
