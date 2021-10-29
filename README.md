@@ -1,2 +1,2 @@
 ## 2 FAST FINGERS
-coming soon!
+documentation: https://docs.google.com/document/d/153P381SZxgB0vC5PTFEYZQ8MAnqsb5E3y5-GpBBomc
