@@ -70,14 +70,12 @@ public class PlayActivity extends AppCompatActivity {
     ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.d("service > ", "disconnected");
             mBounded = false;
             mPNS = null;
         }
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.d("service > ", "connected");
             mBounded = true;
             PlayingNotificationService.LocalBinder mLocalBinder = (PlayingNotificationService.LocalBinder)service;
             mPNS = mLocalBinder.getPNSInstance();

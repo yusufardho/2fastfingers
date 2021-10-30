@@ -77,7 +77,6 @@ public class PlayViewModel extends ViewModel {
         int current_length = 0;
         for (int i = 0; i < words.size(); i++) {
             String now = decryptWord(words.get(i).getWord()) + " ";
-            Log.d(">>",now);
             if (current_length + now.length() > THRESHOLD) {
                 displayText = displayText + "\n";
                 current_length = now.length();

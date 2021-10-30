@@ -42,13 +42,9 @@ public class Timer extends AsyncTask<Integer, Integer,  Integer> {
     protected void onProgressUpdate(Integer... val) {
         if (playFragment != null) {
             playFragment.setTimer(val[0]);
-
-            Log.d(">>","UI: " + val[0]);
         }
         if (playingNotification != null) {
             playingNotification.updateNotification(String.valueOf(val[0]));
-
-            Log.d(">>","Service: " + val[0]);
         }
     }
 
