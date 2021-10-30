@@ -48,7 +48,7 @@ public abstract class VersionHistoryRoomDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final VersionHistoryDao mDao;
-        String[] version_history = {"v1.0 1/11/19", "v1.1 6/11/19"};
+        String[] version_history = {"v1.0 1/11/19", "v1.1 6/11/19", "v1.2 30/10/21"};
         PopulateDbAsync(VersionHistoryRoomDatabase db) {
             mDao = db.versionHistoryDao();
         }
